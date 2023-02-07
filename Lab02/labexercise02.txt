@@ -1,0 +1,20 @@
+select name, dept_name from student;
+
+select * from instructor where dept_name='Comp. Sci.';
+
+select title from course where dept_name='Comp. Sci.' and credits=3;
+
+select takes.course_id, course.title from takes inner join course on takes.course_id=course.course_id and takes.id='12345';
+
+select * from instructor where salary between 40000 and 90000;
+
+select name from instructor where id not in (select id from teaches);
+
+select name from instructor where dept_name='%ch%';
+
+
+select name, length(name) length from student;
+select dept_name, substr(dept_name, 3, 3) from department;
+select upper(name) name from instructor;
+select * from takes nvl(grade, 0);
+select salary, round(salary/3, 2) from instructor;

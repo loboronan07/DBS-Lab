@@ -1,0 +1,56 @@
+create table employee(
+	empno numeric(5, 0) primary key,
+	empname varchar(15) not null,
+	gender char(1) not null check (gender in ('M', 'F')),
+	salary numeric(8, 2) not null,
+	address varchar(50) not null,
+	dno numeric(5, 0) not null
+);
+
+create table department(
+	deptno numeric(3, 0) primary key,
+	deptname char(3),
+	location varchar(20),
+	unique (deptname)
+);
+
+alter table employee add constraint fk_cons foreign key (dno) references department(deptno);
+
+insert into department values (101, 'CSE', 'First Floor, AB5');
+insert into department values (102, 'MAT', 'First Floor, AB1');
+insert into department values (103, 'DSE', 'First Floor, AB4');
+
+insert into employee values (10001, 'Srinivasan', 'M', 87000, 'Manipal', 101);
+insert into employee values (10002, 'Wu', 'M', 90000, 'Mangalore', 102);
+insert into employee values (10003, 'Marie', 'F', 80000, 'Udupi', 101);
+insert into employee values (10004, 'Einstein', 'M', 95000, 'Bangalore', 102);
+insert into employee values (10005, 'Brandt', 'M', 92000, 'Mumbai', 103);
+
+select * from department;
+select * from employee;
+
+insert into department values (101, 'CHM', 'First Floor, AB2');
+insert into department values (101, 'CSE', 'Ground Floor, AB5');
+insert into employee values(10006, 'Gold', 'O', 80000, 'Delhi', 101);
+
+insert into employee values(10006, 'Gold', 'M', 80000, 'Delhi', 105);
+delete from department where deptno=101;
+
+alter table employee drop constraint fk_cons;
+alter table employee add constraint fk_cons foreign key (dno) references department(deptno) on delete cascade;
+
+delete from department where deptno=101;
+
+select * from department;
+select * from employee;
+
+alter table employee modify salary default 10000; 
+insert into employee(empno, empname, gender, address, dno) values (10001, 'Srinivasan', 'M', 'Manipal', 102);
+
+select * from department;
+select * from employee;
+
+desc employee;
+
+drop table employee;
+drop table department;

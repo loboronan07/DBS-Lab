@@ -1,0 +1,77 @@
+create table STUDENT (
+reg_no number(5),
+stu_name varchar(20),
+stu_age number(5),
+stu_dob date,
+subject1_marks number(4,2),
+subject2_marks number(4,2),
+subject3_marks number(4,1));
+
+select * from STUDENT;
+
+insert into STUDENT values(101, 'AAA', 16, '03-jul-88', 80, 90, 98);
+insert into STUDENT values(102, 'BBB', 17, '07-apr-88', 82, 94, 92);
+insert into STUDENT values(103, 'CCC', 16, '09-jan-88', 85, 86, 82);
+insert into STUDENT values(104, 'DDD', 16, '05-aug-88', 95, 94, 99);
+insert into STUDENT values(105, 'EEE', 17, '22-jul-88', 92, 94, 93);
+
+select * from STUDENT;
+
+alter table STUDENT add(gender char(5));
+
+select * from STUDENT;
+
+alter table STUDENT drop column gender;
+
+select * from STUDENT;
+
+alter table STUDENT modify (stu_age number(5));
+
+select * from STUDENT;
+
+rename STUDENT to STUDENTS;
+
+select * from STUDENTS;
+
+truncate table STUDENTS;
+
+select * from STUDENTS;
+
+insert into STUDENTS values(101, 'AAA', 16, '03-jul-88', 80, 90, 98);
+insert into STUDENTS values(103, 'BBB', 17, '07-apr-88', 82, 94, 92);
+insert into STUDENTS values(104, 'CCC', 16, '09-jan-88', 85, 86, 82);
+insert into STUDENTS values(105, 'DDD', 16, '05-aug-88', 95, 94, 99);
+insert into STUDENTS values(106, 'EEE', 17, '22-jul-88', 92, 94, 93);
+
+select * from STUDENTS;
+
+select stu_age student_age from STUDENTS;
+
+select subject1_marks+subject2_marks+subject3_marks total_marks from STUDENTS;
+
+insert into STUDENTS(reg_no, stu_name) values (102, 'KRISH');
+
+select * from STUDENTS;
+
+delete from STUDENTS where reg_no=102;
+
+select * from STUDENTS;
+
+update STUDENTS set stu_name='MANAV';
+
+select * from STUDENTS;
+
+update STUDENTS set stu_name='YADAV' where reg_no=101;
+
+select * from STUDENTS;
+
+delete from STUDENTS;
+
+select * from STUDENTS;
+
+drop table STUDENTS;
+
+
+
+
+

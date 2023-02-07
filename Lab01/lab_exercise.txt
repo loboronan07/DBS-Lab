@@ -1,0 +1,46 @@
+create table EMPLOYEE(
+emp_no number(3),
+emp_name varchar(20),
+emp_address varchar(50));
+
+insert into EMPLOYEE values(101, 'Rahul', 'MANIPAL');
+insert into EMPLOYEE values(102, 'Gautam', 'HYDERABAD');
+insert into EMPLOYEE values(103, 'Ankit', 'MUMBAI');
+insert into EMPLOYEE values(104, 'Shane', 'MANIPAL');
+insert into EMPLOYEE values(105, 'Ronan', 'MANGALORE');
+
+select * from EMPLOYEE;
+
+select emp_name from EMPLOYEE;
+
+select * from EMPLOYEE where emp_address='MANIPAL';
+
+alter table EMPLOYEE add(salary double precision);
+
+update EMPLOYEE set salary=10000 where emp_name='Rahul';
+update EMPLOYEE set salary=17500 where emp_name='Gautam';
+update EMPLOYEE set salary=90000 where emp_name='Ankit';
+update EMPLOYEE set salary=15000 where emp_name='Shane';
+update EMPLOYEE set salary=20000 where emp_name='Ronan';
+
+select * from EMPLOYEE;
+
+desc EMPLOYEE;
+
+delete from EMPLOYEE where emp_address='MANGALORE';
+
+select * from EMPLOYEE;
+
+rename EMPLOYEE to EMPLOYEE1;
+
+drop table EMPLOYEE1;
+
+
+
+
+
+
+
+
+
+
