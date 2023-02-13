@@ -22,7 +22,7 @@ insert into department values (103, 'DSE', 'First Floor, AB4');
 
 insert into employee values (10001, 'Srinivasan', 'M', 87000, 'Manipal', 101);
 insert into employee values (10002, 'Wu', 'M', 90000, 'Mangalore', 102);
-insert into employee values (10003, 'Marie', 'F', 80000, 'Udupi', 101);
+insert into employee values (10003, 'Marie', 'F', 90000, 'Udupi', 101);
 insert into employee values (10004, 'Einstein', 'M', 95000, 'Bangalore', 102);
 insert into employee values (10005, 'Brandt', 'M', 92000, 'Mumbai', 103);
 
