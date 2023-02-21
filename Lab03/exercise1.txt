@@ -34,13 +34,19 @@ select distinct S.id, S.name from student S, takes T where S.id=T.id and not exi
 
 
 
-select course_id from course
+
 
 select S.id, S.name from student S where (select count(*) from takes T, course C where S.id=T.id and T.course_id=C.course_id and C.dept_name='Comp. Sci.')>1;
 
 
-
-
 select dept_name, avg_salary from (select dept_name, avg(salary) avg_salary from instructor group by dept_name) where avg_salary>42000;
+
+
+create view all_course as select C.course_id, C.title, S.sec_id, S.building, S.room_number from course C, section S where C.course_id=S.course_id and C.dept_name='Physics' and S.semester='Fall' and S.year=2009;
+
+select * from all_course;
+
+
+create view department_total_salary as select dept_name, sum(salary) total_salary from instructor group by dept_name;
 
 

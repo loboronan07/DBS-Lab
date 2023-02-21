@@ -1,0 +1,59 @@
+// 1
+select course_id, count(id) no_of_students from takes group by course_id;
+
+//2
+select dept_name, count(id) no_of_students from student group by dept_name havin
+g count(id)>10;
+
+//3
+select dept_name, count(course_id) no_of_courses from course group by dept_name;
+
+//4
+select dept_name, avg(salary) average from instructor group by dept_name having avg(salary)>42000;
+
+//5
+select course_id, sec_id, count(id) enrolment from (select * from takes where semester='Spring' and year=2009) group by (course_id, sec_id);
+
+//6
+select course_id from prereq order by course_id asc;
+
+//7
+select * from instructor order by salary desc;
+
+//8
+select dept_name, sum(salary) total_salary from instructor group by dept_name;
+
+//9
+select dept_name, avg_salary from (select dept_name, avg(salary) avg_salary from instructor group by dept_name) where avg_salary>42000;
+
+//10
+select course_id, sec_id from (select course_id, sec_id, 
+
+//11
+
+
+//12
+select dept_name, avg_salary from (select dept_name, avg(salary) avg_salary, count(id) ins_count from instructor group by dept_name) where avg_salary>50000 and ins_count>5;
+
+//13
+with M as
+	(select max(budget) max_budget from department)
+	select D.dept_name, D.budget from department D, M
+	where D.budget=M.max_budget;
+
+//14
+with total_salary as 
+	(select dept_name, sum(salary) tot_sal from instructor group by dept_name) 
+	select dept_name, tot_sal 
+	from total_salary 
+	where tot_sal > (select avg(tot_sal) from total_salary);
+
+//17
+savepoint s17;
+delete from instructor where dept_name='Finance';
+rollback;
+
+//18
+savepoint s18;
+delete from course where dept_name='Comp. Sci.';
+rollback;
