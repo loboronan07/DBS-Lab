@@ -1,0 +1,54 @@
+--1
+--select course_id, title, count(id) from takes natural join course group by course_id, title;
+--select course_id, count(id) from takes group by course_id;
+
+--2
+--select dept_name from student group by dept_name having count(id) > 10;
+
+--3
+--select dept_name, count(course_id) no_of_courses from course group by dept_name;
+
+--4
+--select dept_name, avg(salary) avg_salary from instructor group by dept_name having avg(salary)>42000;
+
+--5 
+--select course_id, sec_id, count(id) enrolment from takes where semester='Spring' and year=2009 group by course_id, sec_id;
+
+--6
+--select course_id, title from prereq natural join course order by course_id;
+
+--7 
+--select * from instructor order by salary desc;
+
+--8
+--select max(dept_salary) max_dept_salary from (select dept_name, sum(salary) dept_salary from instructor group by dept_name);
+
+--9
+--select dept_name, avg(salary) avg_salary from instructor group by dept_name having avg(salary) > 42000;
+
+--10 check
+--select course_id, sec_id, enrolment from (select course_id, sec_id, count(id) enrolment from takes where semester='Spring' and year=2010 group by course_id, sec_id)
+--  where enrolment=(select max(enrolment) from (select course_id, sec_id, count(id) enrolment from takes where semester='Spring' and year=2010 group by course_id, sec_id));
+
+--11 check
+select distinct name from (select * from instructor where dept_name='Comp. Sci.') 
+  where name in (select name from instructor(id t_id, name ins_name, dept_name) natural join teaches(id t_id, course_id, sec_id, semester, year) natural join takes(id s_id, course_id, sec_id, semester, year) natural join student(id s_id, dept_name) where dept_name='Comp. Sci.');
+
+--12
+--select dept_name, avg_salary from (select dept_name, avg(salary) avg_salary, count(id) ins_count from instructor group by dept_name) where avg_salary>50000 and ins_count>5;
+
+--13 
+--with budgets as (select dept_name, budget from department)
+--  select dept_name from budgets where budget=(select max(budget) from budgets);
+
+--14
+--with total_salary as (select dept_name, sum(salary) salaries from instructor group by dept_name)
+--  select dept_name, salaries from total_salary where salaries >= (select avg(salaries) from total_salary);
+
+--15
+--with max_enrolment as (select course_id, sec_id, count(id) enrolment from takes where semester='Fall' and year=2009 group by course_id, sec_id)
+--  select course_id, sec_id, enrolment from max_enrolment where enrolment=(select max(enrolment) from max_enrolment);
+
+--16
+--with total_credits as (select dept_name, count(tot_cred) total from student group by dept_name)
+--  select dept_name from total_credits where total>(select total from total_credits where dept_name='Finance');
