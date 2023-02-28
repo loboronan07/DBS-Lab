@@ -1,0 +1,51 @@
+--1 
+select bdate, address from employee where fname='John' and minit='B.' and lname='Smith';
+select fname, minit, lname, address from employee natural join department where dname='Research';
+
+--2
+select pnumber, dnum, lname, address, bdate from project natural join department natural join employee where dnum=dnumber and mgr_ssn=ssn and plocation='Stafford';
+
+--3
+select distinct salary from employee;
+
+--4
+select E.fname emp_fname, E.lname emp_lname, S.fname super_fname, S.lname super_lname from employee E, employee S where E.super_ssn=S.ssn;
+
+--5
+create view proj_man as 
+	select * from project natural join department natural join employee where dnum=dnumber and mgr_ssn=ssn;
+
+create view proj_emp as
+	select * from (select pnumber pno, pname from project) natural join (select essn ssn, pno from works_on) natural join employee natural join department where dno=dnumber; 
+
+select pnumber from project 
+	where 
+		pnumber in (select pnumber from proj_man where lname='Smith') 
+			or 
+		pnumber in (select pno pnumber from proj_emp where lname='Smith');
+
+--6
+select * from employee where address like '%Houston, TX';
+
+--7
+select fname, minit, lname, ssn, salary*1.1 new_salary from proj_emp where pname='ProductX';
+
+--8
+select * from employee where dno=5 and salary between 30000 and 40000;
+
+--9
+select dname, dnumber, fname, minit, lname, ssn pno, pname from proj_emp order by dname, lname, fname;
+
+--10
+select fname, minit, lname from employee where super_ssn is null;
+
+--11
+select fname, minit, lname from employee natural join (select essn ssn, dependent_name, sex dependent_sex from dependent) where fname=dependent_name and sex=dependent_sex;
+
+
+
+
+
+
+
+
