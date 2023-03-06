@@ -42,7 +42,29 @@ select fname, minit, lname from employee where super_ssn is null;
 --11
 select fname, minit, lname from employee natural join (select essn ssn, dependent_name, sex dependent_sex from dependent) where fname=dependent_name and sex=dependent_sex;
 
+--12
+select fname, minit, lname from employee where ssn not in (select essn from dependent);
 
+--13
+select fname, minit, lname from employee, department where ssn=mgr_ssn and ssn in (select essn from dependent);
+
+--14
+select distinct essn from works_on where pno between 1 and 3;
+
+--15
+select sum(salary) sum_salary, max(salary) maximum_salary, min(salary) minimum_salary, avg(salary) average_salary from employee;
+
+--16
+select sum(salary) sum_salary, max(salary) maximum_salary, min(salary) minimum_salary, avg(salary) average_salary from employee, department where employee.dno=department.dnumber and department.dname='Research';
+
+--17
+select pnumber, pname, count(essn) no_of_employees from project, works_on where pno=pnumber group by pnumber, pname;
+
+--18
+select pnumber, pname, count(essn) no_of_employees from project, works_on where pno=pnumber group by pnumber, pname having count(essn) > 2;
+
+--19
+select dno, count(ssn) from employee where dno in (select dno from employee group by dno having count(ssn) >= 5) and salary > 40000 group by dno;
 
 
 
