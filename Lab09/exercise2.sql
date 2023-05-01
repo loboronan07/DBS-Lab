@@ -1,17 +1,15 @@
-set serveroutput on;
+declare 
+	stu student%rowtype;
+	cursor ex2 is select * from student order by tot_cred;
+begin
+    dbms_output.put_line(lpad('ID', 10) || lpad('Name', 10) || lpad('Dept Name', 15) || lpad('Tot Cred', 10));
+	open ex2;
+	loop
+		fetch ex2 into stu;
+		exit when ex2%notfound or ex2%rowcount>10;
 
-declare
-	cursor c1 is select * from student order by tot_cred;
-	stud student%rowtype;
-
-begin 
-	dbms_output.put_line(rpad('ID', 6) || rpad('Name', 10) || rpad('Department Name', 20) || rpad('Total Credits', 15));
-	open c1;
-		loop
-		  fetch c1 into stud;
-		  exit when c1%rowcount>10 or c1%notfound;
-		  dbms_output.put_line(rpad(to_char(stud.id), 6) || rpad(to_char(stud.name), 10) || rpad(to_char(stud.dept_name), 20) || rpad(to_char(stud.tot_cred), 15));
-		end loop;
-
+		dbms_output.put_line(lpad(stu.id, 10) || lpad(stu.name, 10) || lpad(stu.dept_name, 15) || lpad(stu.tot_cred, 10));
+	end loop;
+	close ex2;
 end;
 /
