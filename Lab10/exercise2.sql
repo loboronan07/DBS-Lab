@@ -18,7 +18,7 @@ end;
 declare 
     dname department.dept_name%type;
 begin
-	dname := 'Comp. Sci.';
+	dname := '&department_name';
 	disp_by_department(dname);
 end;
 /
