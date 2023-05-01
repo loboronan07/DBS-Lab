@@ -1,18 +1,16 @@
-set serveroutput on;
-
-create or replace function get_sqr(n number) 
-return number as
-    sqr number;
-    begin 
-        sqr := n * n;
-    return sqr;
-    end;
+create or replace function get_square(x integer) 
+return integer as
+	sq integer;
+begin
+	sq := x*x;
+	return sq;
+end;
 /
 
 declare 
-    n number;
+	a integer;
 begin
-    n := &n;
-    dbms_output.put_line(to_char(n) || '^2 = ' || to_char(get_sqr(n)));
+	a := &a;
+	dbms_output.put_line(a || '*' || a || ' =  ' || get_square(a));
 end;
 /
