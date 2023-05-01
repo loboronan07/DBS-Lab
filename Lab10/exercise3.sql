@@ -1,24 +1,18 @@
-set serveroutput on;
-
-create or replace procedure course_popular(dpt_nm department.dept_name%type) as
-    cidmax course.course_id%type;
-    titlemax course.title%type;
-    begin
-        select course_id, title into cidmax, titlemax from 
-            (select course_id, title, count(*) counts from course natural join takes where dept_name=dpt_nm group by course_id, title order by counts desc)
-                where rownum < 2;
-        dbms_output.put_line(rpad(dpt_nm, 15) || rpad(to_char(cidmax), 15) || rpad(titlemax, 30));
-    end;
+create or replace procedure course_popular(dname department.dept_name%type) as
+    title course.title%type;
+begin
+    select title into title from (select title, count(id) counts from course natural join takes where dept_name = dname group by title order by counts desc) where rownum < 2; 
+	dbms_output.put_line(lpad(dname, 15) || lpad(title, 29));
+end;
 /
 
 declare 
-    cursor c1 is select * from department;
-    dpt_nm department.dept_name%type;
+	cursor ex3 is select dept_name from department;
 begin
-    dbms_output.put_line(rpad('Department', 15) || rpad('Course ID', 15) || rpad('Course Title', 30));
-    for dpt in c1
-    loop
-        course_popular(dpt.dept_name);
-    end loop;
+	dbms_output.put_line(lpad('Department Name', 15) || lpad('Most Popular Course', 29));
+
+	for dept in ex3 loop
+		course_popular(dept.dept_name);
+	end loop;
 end;
 /
